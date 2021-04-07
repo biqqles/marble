@@ -8,7 +8,7 @@
 
 # The Marble Markdown formatter.
 module Marble
-  VERSION = '0.1'
+  VERSION = '0.2'
 
   # build a hash of characters that must be escaped and their escaped forms,
   # and a regex to detect the former.
@@ -126,40 +126,40 @@ module Marble
     alias italics italic
     alias strike strikethrough
   end
-end
 
-# The most common formatting operations are added to String as extension methods.
-class String
-  # This string with all Markdown syntax escaped.
-  def escape
-    Marble.escape self
+  # The most common formatting operations are added to String as extension methods.
+  refine String do
+    # This string with all Markdown syntax escaped.
+    def escape
+      Marble.escape self
+    end
+
+    # Embolden this string.
+    def bold
+      Marble.bold self
+    end
+
+    # Display this string as code.
+    def code
+      Marble.code self
+    end
+
+    # Italicise this string.
+    def italic
+      Marble.italic self
+    end
+
+    # Strike-out this string.
+    def strikethrough
+      Marble.strikethrough self
+    end
+
+    # Create a link using this string as the text.
+    def link(url)
+      Marble.link self, url
+    end
+
+    alias_method :italics, :italic
+    alias_method :strike, :strikethrough
   end
-
-  # Embolden this string.
-  def bold
-    Marble.bold self
-  end
-
-  # Display this string as code.
-  def code
-    Marble.code self
-  end
-
-  # Italicise this string.
-  def italic
-    Marble.italic self
-  end
-
-  # Strike-out this string.
-  def strikethrough
-    Marble.strikethrough self
-  end
-
-  # Create a link using this string as the text.
-  def link(url)
-    Marble.link self, url
-  end
-
-  alias italics italic
-  alias strike strikethrough
 end

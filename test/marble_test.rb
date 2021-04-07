@@ -10,6 +10,7 @@ require 'minitest/autorun'
 require 'redcarpet'
 
 require_relative '../lib/marble'
+using Marble
 
 class MarbleTest < Minitest::Test
   def setup
@@ -57,6 +58,7 @@ class MarbleTest < Minitest::Test
     example = 'Emphasis'
 
     assert_equal "*#{example}*", example.italic
+    assert_equal "*#{example}*", example.italics
     assert_equal "<p><em>#{example}</em></p>\n", @markdown.render(example.italic)
   end
 
@@ -134,13 +136,13 @@ class MarbleTest < Minitest::Test
   end
 
   def test_readme
-    assert_equal "[\\#RubyGems](https://rubygems.org/)",
+    assert_equal '[\\#RubyGems](https://rubygems.org/)',
                  Marble.link('#RubyGems'.escape, 'https://rubygems.org/')
 
-    assert_equal "*~~**Marble\\!**~~*",
+    assert_equal '*~~**Marble\\!**~~*',
                  'Marble!'.escape.bold.strikethrough.italic
 
-    assert_equal "I am **bold** and I am *italic*!",
+    assert_equal 'I am **bold** and I am *italic*!',
                  "I am #{'bold'.bold} and I am #{'italic'.italic}!"
   end
 end

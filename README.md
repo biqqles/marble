@@ -26,9 +26,10 @@ Upon importing the module
 
 ```ruby
 require 'marble'
+using Marble
 ```
 
-formatting methods will be available in `Marble`. The most common operations are also added to `String` as extension methods.
+formatting methods will be available in `Marble`. The most common operations are also added to `String` as extension methods, if you activate these with `using Marble`.
 
 You can mix and match syntaxes:
 
